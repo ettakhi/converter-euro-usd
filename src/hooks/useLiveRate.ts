@@ -20,7 +20,7 @@ const useLiveRate = ({
     const id = setInterval(() => {
       setRealRate((current) => {
         const delta = Math.random() * (variation * 2) - variation
-        const next = Number(Math.max(0.2, current + delta).toFixed(4))
+        const next = Number((baseRate + delta).toFixed(4))
         setRateDirection(
           next > current ? 'up' : next < current ? 'down' : 'flat',
         )
@@ -29,7 +29,7 @@ const useLiveRate = ({
     }, interval)
 
     return () => clearInterval(id)
-  }, [variation, interval])
+  }, [baseRate, variation, interval])
 
   return { realRate, rateDirection }
 }
